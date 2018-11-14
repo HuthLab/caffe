@@ -47,7 +47,7 @@ if(build_using MATCHES "Matlab")
 
   caffe_fetch_and_set_proper_mexext(Matlab_caffe_mex)
   add_custom_command(OUTPUT ${Matlab_caffe_mex} COMMAND ${Matlab_mex}
-      ARGS -output ${Matlab_caffe_mex} ${Matlab_srcs} ${cflags} ${link_folders} ${libflags}
+      ARGS "GCC=${CMAKE_C_COMPILER}" "G++=${CMAKE_CXX_COMPILER}" "-I${CUDA_INCLUDE_DIRS}" "-I${Caffe_INCLUDE_DIR}" -output ${Matlab_caffe_mex} ${Matlab_srcs} ${cflags} ${link_folders} ${libflags}
       DEPENDS caffe COMMENT "Building Matlab interface: ${Matlab_caffe_mex}" VERBATIM)
   add_custom_target(matlab ALL DEPENDS ${Matlab_caffe_mex} SOURCES ${Matlab_srcs})
 
